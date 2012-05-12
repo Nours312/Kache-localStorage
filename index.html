@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Kache-Test</title>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js" ></script>
+        <script type="text/javascript" src="localStorage.js" ></script>
+    </head>
+	<body>
+		<p><span id="purge" style="cursor: pointer;">Purger le navigateur</span></p>
+		<p>
+			<span id="load" style="cursor: pointer;">Charger dans le navigateur : </span>
+			<select id="cacheName">
+				<option value="">Selectionnez</option>
+				<option>maBDD</option>
+				<option>maBDD2</option>
+			</select>
+		</p>
+		<div id="main">
+		</div>
+		<script type="text/javascript">
+			$('purge').on('click', function(){
+				try{
+					Kache.purge();
+					DescribMe();
+				} catch(z){console.log("TRY fileName", z) ;}
+			});
+			$('load').on('click', function(){
+				try{
+				if(!$F('cacheName').empty()){
+					Kache.get($F('cacheName'), DescribMe) ;
+					$('cacheName').selectedIndex = 0 ;
+				}
+				} catch(z){console.log("TRY fileName", z) ;}
+			});
+			DescribMe();
+		</script>
+	</body>
+</html>
